@@ -158,12 +158,12 @@ export default function App() {
   return (
     <div style={{ fontFamily: "'Georgia', serif", minHeight: "100vh", background: "#0f1117", color: "#e8e0d0" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap');
+        /* system fonts only - no external dependencies */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: #1a1d25; } ::-webkit-scrollbar-thumb { background: #d4a843; border-radius: 2px; }
         .btn { cursor: pointer; border: none; transition: all 0.2s; }
         .card { background: #1a1d25; border: 1px solid #2a2d35; border-radius: 12px; }
-        .tag-prot { background: #1e3a2f; color: #5eb885; border-radius: 20px; padding: 2px 8px; font-size: 11px; font-family: 'DM Mono', monospace; }
+        .tag-prot { background: #1e3a2f; color: #5eb885; border-radius: 20px; padding: 2px 8px; font-size: 11px; font-family: 'SF Mono', 'Courier New', monospace; }
         .slide-in { animation: slideIn 0.2s ease; }
         @keyframes slideIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
         .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 50; display: flex; align-items: flex-end; justify-content: center; }
@@ -183,7 +183,7 @@ export default function App() {
         input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
         input { outline: none; }
         input:focus { border-color: #d4a843 !important; }
-        .pasto-pill { padding: 6px 14px; border-radius: 20px; border: 1.5px solid; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+        .pasto-pill { padding: 6px 14px; border-radius: 20px; border: 1.5px solid; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; cursor: pointer; transition: all 0.15s; }
         .ricetta-card { background: #1a1d25; border: 1px solid #2a2d35; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
         .spesa-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #1a1d25; }
         .spesa-row:last-child { border-bottom: none; }
@@ -193,8 +193,8 @@ export default function App() {
 
       {/* Header */}
       <div style={{ padding: "20px 16px 0", maxWidth: 640, margin: "0 auto" }}>
-        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, letterSpacing: 3, color: "#d4a843", textTransform: "uppercase" }}>Piano Alimentare · 95kg</span>
-        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 900, lineHeight: 1.1, marginBottom: 16, marginTop: 2 }}>
+        <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 10, letterSpacing: 3, color: "#d4a843", textTransform: "uppercase" }}>Piano Alimentare · 95kg</span>
+        <h1 style={{ fontFamily: "-apple-system, 'SF Pro Display', Georgia, serif", fontSize: 24, fontWeight: 900, lineHeight: 1.1, marginBottom: 16, marginTop: 2 }}>
           {tab === "tracker" && <>Tracker <span style={{ color: "#d4a843" }}>proteine</span></>}
           {tab === "ricette" && <>Le mie <span style={{ color: "#d4a843" }}>ricette</span></>}
           {tab === "valori" && <>Valori <span style={{ color: "#d4a843" }}>proteici</span></>}
@@ -211,21 +211,21 @@ export default function App() {
             <div className="card" style={{ padding: 16, marginBottom: 14 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
                 <div>
-                  <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#888", letterSpacing: 2, marginBottom: 4 }}>OGGI</p>
+                  <p style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 10, color: "#888", letterSpacing: 2, marginBottom: 4 }}>OGGI</p>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 40, fontWeight: 900, color: percGiorno >= 90 ? "#5eb885" : "#e8e0d0" }}>{totGiorno()}</span>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 14, color: "#666" }}>/ {TARGET_GIORNO}g</span>
+                    <span style={{ fontFamily: "-apple-system, 'SF Pro Display', Georgia, serif", fontSize: 40, fontWeight: 900, color: percGiorno >= 90 ? "#5eb885" : "#e8e0d0" }}>{totGiorno()}</span>
+                    <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 14, color: "#666" }}>/ {TARGET_GIORNO}g</span>
                   </div>
                 </div>
                 <div style={{ width: 64, height: 64, borderRadius: "50%", border: `3px solid ${percGiorno >= 90 ? "#5eb885" : "#d4a843"}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 15, fontWeight: 700 }}>{Math.round(percGiorno)}%</span>
+                  <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 15, fontWeight: 700 }}>{Math.round(percGiorno)}%</span>
                 </div>
               </div>
               <div className="progress-bar">
                 <div style={{ height: "100%", width: `${percGiorno}%`, background: "linear-gradient(90deg,#d4a843,#5eb885)", borderRadius: 3, transition: "width 0.4s" }} />
               </div>
               {totGiorno() > 0 && (
-                <button className="btn" onClick={() => setLog({ colazione: [], pranzo: [], cena: [] })} style={{ marginTop: 10, fontSize: 12, color: "#555", fontFamily: "'DM Sans', sans-serif", background: "none" }}>
+                <button className="btn" onClick={() => setLog({ colazione: [], pranzo: [], cena: [] })} style={{ marginTop: 10, fontSize: 12, color: "#555", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", background: "none" }}>
                   🔄 Reset giornata
                 </button>
               )}
@@ -243,11 +243,11 @@ export default function App() {
                     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                       <span style={{ fontSize: 18 }}>{emoji}</span>
                       <div>
-                        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 16, fontWeight: 700, textTransform: "capitalize" }}>{pasto}</span>
-                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#555", marginLeft: 8 }}>{target[0]}-{target[1]}g</span>
+                        <span style={{ fontFamily: "-apple-system, 'SF Pro Display', Georgia, serif", fontSize: 16, fontWeight: 700, textTransform: "capitalize" }}>{pasto}</span>
+                        <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 10, color: "#555", marginLeft: 8 }}>{target[0]}-{target[1]}g</span>
                       </div>
                     </div>
-                    <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 18, fontWeight: 700, color: col }}>{att}g</span>
+                    <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 18, fontWeight: 700, color: col }}>{att}g</span>
                   </div>
                   <div className="progress-bar" style={{ marginBottom: log[pasto].length ? 10 : 0 }}>
                     <div style={{ height: "100%", width: `${perc}%`, background: col, borderRadius: 3, transition: "width 0.4s" }} />
@@ -257,14 +257,14 @@ export default function App() {
                       {log[pasto].map(item => (
                         <div key={item.uid} className="log-row">
                           <span style={{ fontSize: 14 }}>{item.emoji}</span>
-                          <span style={{ flex: 1, fontSize: 13, fontFamily: "'DM Sans', sans-serif", color: "#ccc" }}>{item.nome}</span>
+                          <span style={{ flex: 1, fontSize: 13, fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", color: "#ccc" }}>{item.nome}</span>
                           <span className="tag-prot">+{item.protCalc}g</span>
                           <button className="x-btn" onClick={() => rimuoviLog(pasto, item.uid)}>✕</button>
                         </div>
                       ))}
                     </div>
                   )}
-                  <button className="btn" onClick={() => { setTab("valori"); setPastoDest(pasto); }} style={{ width: "100%", marginTop: 10, padding: "8px", background: "#0f1117", border: "1px dashed #2a2d35", borderRadius: 8, color: "#666", fontFamily: "'DM Sans', sans-serif", fontSize: 13 }}>
+                  <button className="btn" onClick={() => { setTab("valori"); setPastoDest(pasto); }} style={{ width: "100%", marginTop: 10, padding: "8px", background: "#0f1117", border: "1px dashed #2a2d35", borderRadius: 8, color: "#666", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 13 }}>
                     + Aggiungi ingrediente
                   </button>
                 </div>
@@ -282,7 +282,7 @@ export default function App() {
               ].map((c, i) => (
                 <div key={i} style={{ background: "#1a1d25", border: "1px solid #2a2d35", borderLeft: "3px solid #d4a843", borderRadius: 10, padding: "10px 14px", marginBottom: 8, display: "flex", gap: 10, alignItems: "flex-start" }}>
                   <span style={{ fontSize: 16, flexShrink: 0 }}>{c.emoji}</span>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#aaa", lineHeight: 1.5 }}>{c.testo}</p>
+                  <p style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 13, color: "#aaa", lineHeight: 1.5 }}>{c.testo}</p>
                 </div>
               ))}
             </div>
@@ -291,10 +291,10 @@ export default function App() {
         {tab === "ricette" && (
           <div className="slide-in">
             <input type="text" placeholder="🔍 Cerca ricetta..." value={ricercaRicette} onChange={e => setRicercaRicette(e.target.value)}
-              style={{ width: "100%", background: "#1a1d25", border: "1px solid #2a2d35", borderRadius: 10, padding: "10px 14px", color: "#e8e0d0", fontFamily: "'DM Sans', sans-serif", fontSize: 14, marginBottom: 12 }} />
+              style={{ width: "100%", background: "#1a1d25", border: "1px solid #2a2d35", borderRadius: 10, padding: "10px 14px", color: "#e8e0d0", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 14, marginBottom: 12 }} />
             <div style={{ display: "flex", gap: 6, marginBottom: 16, overflowX: "auto", paddingBottom: 4 }}>
               {["tutti", "colazione", "pranzo", "cena"].map(p => (
-                <button key={p} onClick={() => setPastoFiltro(p)} style={{ flexShrink: 0, padding: "5px 12px", borderRadius: 20, border: "1px solid", borderColor: pastoFiltro === p ? "#d4a843" : "#2a2d35", background: pastoFiltro === p ? "#d4a843" : "transparent", color: pastoFiltro === p ? "#0f1117" : "#888", fontFamily: "'DM Sans', sans-serif", fontSize: 12, cursor: "pointer" }}>
+                <button key={p} onClick={() => setPastoFiltro(p)} style={{ flexShrink: 0, padding: "5px 12px", borderRadius: 20, border: "1px solid", borderColor: pastoFiltro === p ? "#d4a843" : "#2a2d35", background: pastoFiltro === p ? "#d4a843" : "transparent", color: pastoFiltro === p ? "#0f1117" : "#888", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 12, cursor: "pointer" }}>
                   {p === "colazione" ? "☀️ " : p === "pranzo" ? "⚡ " : p === "cena" ? "🌙 " : ""}{p}
                 </button>
               ))}
@@ -302,15 +302,15 @@ export default function App() {
             {ricetteFiltrate.map(r => (
               <div key={r.id} className="ricetta-card">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
-                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 14, flex: 1, paddingRight: 10 }}>{r.nome}</span>
+                  <span style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontWeight: 600, fontSize: 14, flex: 1, paddingRight: 10 }}>{r.nome}</span>
                   <div style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-end" }}>
                     <span className="tag-prot">🥩 {r.prot}g</span>
-                    <span style={{ background: "#1a2a3a", color: "#5b9bd4", borderRadius: 20, padding: "2px 8px", fontSize: 11, fontFamily: "DM Mono, monospace" }}>⏱ {r.tempo}min</span>
+                    <span style={{ background: "#1a2a3a", color: "#5b9bd4", borderRadius: 20, padding: "2px 8px", fontSize: 11, fontFamily: "'SF Mono', 'Courier New', monospace" }}>⏱ {r.tempo}min</span>
                   </div>
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
                   {r.ingredienti.map((ing, i) => (
-                    <span key={i} style={{ fontSize: 11, color: "#666", background: "#0f1117", border: "1px solid #2a2d35", borderRadius: 6, padding: "2px 7px", fontFamily: "'DM Sans', sans-serif" }}>{ing}</span>
+                    <span key={i} style={{ fontSize: 11, color: "#666", background: "#0f1117", border: "1px solid #2a2d35", borderRadius: 6, padding: "2px 7px", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif" }}>{ing}</span>
                   ))}
                 </div>
               </div>
@@ -332,18 +332,18 @@ export default function App() {
               ].map((c, i) => (
                 <div key={i} style={{ flexShrink: 0, background: "#1a1d25", border: "1px solid #2a2d35", borderRadius: 10, padding: "8px 12px", maxWidth: 180 }}>
                   <span style={{ fontSize: 14 }}>{c.emoji}</span>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#aaa", marginTop: 4, lineHeight: 1.4 }}>{c.testo}</p>
+                  <p style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 11, color: "#aaa", marginTop: 4, lineHeight: 1.4 }}>{c.testo}</p>
                 </div>
               ))}
             </div>
-            <p style={{ fontSize: 12, color: "#888", fontFamily: "'DM Mono', monospace", marginBottom: 12 }}>
+            <p style={{ fontSize: 12, color: "#888", fontFamily: "'SF Mono', 'Courier New', monospace", marginBottom: 12 }}>
               Tocca un ingrediente per aggiungerlo al tracker o alla spesa
             </p>
             <input type="text" placeholder="🔍 Cerca ingrediente..." value={ricerca} onChange={e => setRicerca(e.target.value)}
-              style={{ width: "100%", background: "#1a1d25", border: "1px solid #2a2d35", borderRadius: 10, padding: "10px 14px", color: "#e8e0d0", fontFamily: "'DM Sans', sans-serif", fontSize: 14, marginBottom: 12 }} />
+              style={{ width: "100%", background: "#1a1d25", border: "1px solid #2a2d35", borderRadius: 10, padding: "10px 14px", color: "#e8e0d0", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 14, marginBottom: 12 }} />
             <div style={{ display: "flex", gap: 6, overflowX: "auto", paddingBottom: 8, marginBottom: 12 }}>
               {CATEGORIE.map(cat => (
-                <button key={cat} onClick={() => setCategoriaFiltro(cat)} style={{ flexShrink: 0, padding: "5px 12px", borderRadius: 20, border: "1px solid", borderColor: categoriaFiltro === cat ? "#d4a843" : "#2a2d35", background: categoriaFiltro === cat ? "#d4a843" : "transparent", color: categoriaFiltro === cat ? "#0f1117" : "#888", fontFamily: "'DM Sans', sans-serif", fontSize: 12, cursor: "pointer" }}>
+                <button key={cat} onClick={() => setCategoriaFiltro(cat)} style={{ flexShrink: 0, padding: "5px 12px", borderRadius: 20, border: "1px solid", borderColor: categoriaFiltro === cat ? "#d4a843" : "#2a2d35", background: categoriaFiltro === cat ? "#d4a843" : "transparent", color: categoriaFiltro === cat ? "#0f1117" : "#888", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 12, cursor: "pointer" }}>
                   {cat}
                 </button>
               ))}
@@ -356,8 +356,8 @@ export default function App() {
                     <span style={{ fontSize: 18, flexShrink: 0 }}>{ing.emoji}</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-                        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 500 }}>{ing.nome}</span>
-                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 13, fontWeight: 700, color: ing.colore, marginLeft: 8 }}>
+                        <span style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 13, fontWeight: 500 }}>{ing.nome}</span>
+                        <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 13, fontWeight: 700, color: ing.colore, marginLeft: 8 }}>
                           {ing.prot}g {ing.per100 ? "/ 100g" : `/ ${ing.unitLabel}`}
                         </span>
                       </div>
@@ -382,16 +382,16 @@ export default function App() {
             {spesa.length === 0 ? (
               <div style={{ textAlign: "center", padding: "60px 20px" }}>
                 <div style={{ fontSize: 48, marginBottom: 12 }}>🛒</div>
-                <p style={{ color: "#888", fontFamily: "'DM Sans', sans-serif", marginBottom: 16 }}>Vai in <strong style={{ color: "#d4a843" }}>Valori</strong> e tocca 🛒 su ogni ingrediente che vuoi comprare</p>
-                <button className="btn" onClick={() => setTab("valori")} style={{ padding: "10px 20px", background: "#d4a843", color: "#0f1117", borderRadius: 8, fontFamily: "'DM Sans', sans-serif", fontWeight: 700 }}>Vai ai Valori →</button>
+                <p style={{ color: "#888", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", marginBottom: 16 }}>Vai in <strong style={{ color: "#d4a843" }}>Valori</strong> e tocca 🛒 su ogni ingrediente che vuoi comprare</p>
+                <button className="btn" onClick={() => setTab("valori")} style={{ padding: "10px 20px", background: "#d4a843", color: "#0f1117", borderRadius: 8, fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontWeight: 700 }}>Vai ai Valori →</button>
               </div>
             ) : (
               <>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-                  <span style={{ fontSize: 12, color: "#888", fontFamily: "'DM Mono', monospace" }}>
+                  <span style={{ fontSize: 12, color: "#888", fontFamily: "'SF Mono', 'Courier New', monospace" }}>
                     {spesa.filter(s => s.spuntato).length} / {spesa.length} nel carrello
                   </span>
-                  <button className="btn x-btn" onClick={() => setSpesa([])} style={{ fontSize: 12, color: "#555", fontFamily: "'DM Sans', sans-serif" }}>Svuota lista</button>
+                  <button className="btn x-btn" onClick={() => setSpesa([])} style={{ fontSize: 12, color: "#555", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif" }}>Svuota lista</button>
                 </div>
                 <div className="progress-bar" style={{ marginBottom: 14 }}>
                   <div style={{ height: "100%", width: spesa.length ? `${(spesa.filter(s => s.spuntato).length / spesa.length) * 100}%` : "0%", background: "#d4a843", borderRadius: 3, transition: "width 0.4s" }} />
@@ -403,8 +403,8 @@ export default function App() {
                         {item.spuntato && <span style={{ color: "#0f1117", fontSize: 12, fontWeight: 700 }}>✓</span>}
                       </div>
                       <span style={{ fontSize: 16 }}>{item.emoji}</span>
-                      <span style={{ flex: 1, fontFamily: "'DM Sans', sans-serif", fontSize: 14, textDecoration: item.spuntato ? "line-through" : "none" }}>{item.nome}</span>
-                      <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: item.colore }}>{item.prot}g/100g</span>
+                      <span style={{ flex: 1, fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 14, textDecoration: item.spuntato ? "line-through" : "none" }}>{item.nome}</span>
+                      <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 11, color: item.colore }}>{item.prot}g/100g</span>
                       <button className="x-btn" onClick={() => rimuoviSpesa(item.id)}>✕</button>
                     </div>
                   ))}
@@ -420,7 +420,7 @@ export default function App() {
         {[["valori","💪","Valori"],["tracker","🥩","Tracker"],["spesa","🛒","Spesa"],["ricette","🍽","Ricette"]].map(([id, emoji, label]) => (
           <button key={id} className="tab-btn-b" onClick={() => setTab(id)} style={{ position: "relative" }}>
             <span style={{ fontSize: 22 }}>{emoji}</span>
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 10, color: tab === id ? "#d4a843" : "#555", fontWeight: tab === id ? 700 : 400 }}>{label}</span>
+            <span style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 10, color: tab === id ? "#d4a843" : "#555", fontWeight: tab === id ? 700 : 400 }}>{label}</span>
             {tab === id && <div style={{ position: "absolute", bottom: 0, width: "100%", height: 2, background: "#d4a843" }} />}
           </button>
         ))}
@@ -432,32 +432,32 @@ export default function App() {
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
               <div>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#d4a843", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>Aggiungi al tracker</p>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 700 }}>{modalIngrediente.emoji} {modalIngrediente.nome}</h3>
-                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: 12, color: "#888", marginTop: 4 }}>{modalIngrediente.prot}g proteine / {modalIngrediente.per100 ? "100g" : modalIngrediente.unitLabel}</p>
+                <p style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 10, color: "#d4a843", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>Aggiungi al tracker</p>
+                <h3 style={{ fontFamily: "-apple-system, 'SF Pro Display', Georgia, serif", fontSize: 20, fontWeight: 700 }}>{modalIngrediente.emoji} {modalIngrediente.nome}</h3>
+                <p style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 12, color: "#888", marginTop: 4 }}>{modalIngrediente.prot}g proteine / {modalIngrediente.per100 ? "100g" : modalIngrediente.unitLabel}</p>
               </div>
-              <button className="btn" style={{ background: "#2a2d35", color: "#888", borderRadius: 8, padding: "6px 12px", fontFamily: "'DM Sans', sans-serif" }} onClick={() => setModalIngrediente(null)}>✕</button>
+              <button className="btn" style={{ background: "#2a2d35", color: "#888", borderRadius: 8, padding: "6px 12px", fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif" }} onClick={() => setModalIngrediente(null)}>✕</button>
             </div>
 
             {/* Quantità */}
             <div style={{ marginBottom: 20 }}>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#aaa", marginBottom: 8 }}>
+              <p style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 13, color: "#aaa", marginBottom: 8 }}>
                 {modalIngrediente.per100 ? "Quanti grammi?" : `Quante unità (${modalIngrediente.unitLabel})?`}
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <input type="number" value={grammi} onChange={e => setGrammi(e.target.value)} placeholder={modalIngrediente.per100 ? "es. 200" : "es. 2"}
-                  style={{ flex: 1, background: "#1a1d25", border: "2px solid #2a2d35", borderRadius: 10, padding: "12px 16px", color: "#e8e0d0", fontFamily: "'DM Mono', monospace", fontSize: 20, textAlign: "center" }} />
+                  style={{ flex: 1, background: "#1a1d25", border: "2px solid #2a2d35", borderRadius: 10, padding: "12px 16px", color: "#e8e0d0", fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 20, textAlign: "center" }} />
                 {grammi && parseFloat(grammi) > 0 && (
                   <div style={{ textAlign: "center" }}>
-                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 28, fontWeight: 700, color: "#5eb885" }}>{protCalcolate()}g</div>
-                    <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#888" }}>proteine</div>
+                    <div style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 28, fontWeight: 700, color: "#5eb885" }}>{protCalcolate()}g</div>
+                    <div style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 11, color: "#888" }}>proteine</div>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Scegli pasto */}
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: "#aaa", marginBottom: 10 }}>A quale pasto?</p>
+            <p style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 13, color: "#aaa", marginBottom: 10 }}>A quale pasto?</p>
             <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
               {PASTI.map(p => (
                 <button key={p} className="pasto-pill" onClick={() => setPastoDest(p)} style={{ flex: 1, borderColor: pastoDest === p ? "#d4a843" : "#2a2d35", background: pastoDest === p ? "#d4a843" : "transparent", color: pastoDest === p ? "#0f1117" : "#888", fontWeight: pastoDest === p ? 700 : 400, textAlign: "center" }}>
@@ -467,7 +467,7 @@ export default function App() {
             </div>
 
             <button className="btn" onClick={aggiungiAlTracker} disabled={!grammi || parseFloat(grammi) <= 0}
-              style={{ width: "100%", padding: "14px", background: grammi && parseFloat(grammi) > 0 ? "#d4a843" : "#2a2d35", color: grammi && parseFloat(grammi) > 0 ? "#0f1117" : "#555", borderRadius: 10, fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 16 }}>
+              style={{ width: "100%", padding: "14px", background: grammi && parseFloat(grammi) > 0 ? "#d4a843" : "#2a2d35", color: grammi && parseFloat(grammi) > 0 ? "#0f1117" : "#555", borderRadius: 10, fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontWeight: 700, fontSize: 16 }}>
               Aggiungi {grammi && parseFloat(grammi) > 0 ? `+${protCalcolate()}g proteine` : ""}
             </button>
           </div>
