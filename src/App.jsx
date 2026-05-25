@@ -192,7 +192,7 @@ export default function App() {
       `}</style>
 
       {/* Header */}
-      <div style={{ padding: "20px 16px 0", maxWidth: 640, margin: "0 auto" }}>
+      <div style={{ padding: "56px 16px 0", maxWidth: 640, margin: "0 auto" }}>
         <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 10, letterSpacing: 3, color: "#d4a843", textTransform: "uppercase" }}>Piano Alimentare · 95kg</span>
         <h1 style={{ fontFamily: "-apple-system, 'SF Pro Display', Georgia, serif", fontSize: 24, fontWeight: 900, lineHeight: 1.1, marginBottom: 16, marginTop: 2 }}>
           {tab === "tracker" && <>Tracker <span style={{ color: "#d4a843" }}>proteine</span></>}
