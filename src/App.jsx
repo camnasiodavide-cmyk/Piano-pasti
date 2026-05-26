@@ -277,7 +277,7 @@ export default function App() {
                           <span style={{ fontSize: 14 }}>{item.emoji}</span>
                           <span style={{ flex: 1, fontSize: 13, fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", color: "#ccc" }}>{item.nome}</span>
                           <span className="tag-prot">+{item.protCalc}g</span>
-                          <button className="x-btn" onPointerDown={() => rimuoviLog(pasto, item.uid)}>✕</button>
+                          <button className="x-btn" onClick={(e) => { e.preventDefault(); e.stopPropagation(); rimuoviLog(pasto, item.uid); }} style={{ background: "#2a1818", color: "#e05555", border: "1px solid #3a2020", borderRadius: 6, padding: "3px 8px", fontSize: 11, fontFamily: "sans-serif" }}>elimina</button>
                         </div>
                       ))}
                     </div>
