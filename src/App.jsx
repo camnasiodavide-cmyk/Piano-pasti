@@ -144,6 +144,8 @@ export default function App() {
     setModalIngrediente(null);
   };
 
+  const rimuoviLog = (pasto, uid) => setLog(prev => ({ ...prev, [pasto]: prev[pasto].filter(i => i.uid !== uid) }));
+
   const aggiungiAllaSpesa = (ing) => {
     if (spesa.find(s => s.id === ing.id)) return;
     setSpesa(prev => [...prev, { ...ing, spuntato: false }]);
