@@ -127,7 +127,7 @@ export default function App() {
 
   const protCalcolate = () => {
     if (!modalIngrediente || !grammi) return 0;
-    if (!modalIngrediente.per100) return modalIngrediente.prot * parseFloat(grammi || 0);
+    if (!modalIngrediente.per100) return Math.round(modalIngrediente.prot * parseFloat(grammi || 0) * 10) / 10;
     return Math.round((modalIngrediente.prot * parseFloat(grammi || 0)) / 100 * 10) / 10;
   };
 
