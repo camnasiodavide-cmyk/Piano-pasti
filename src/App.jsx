@@ -2,86 +2,89 @@ import { useState } from "react";
 
 const INGREDIENTI_DB = [
   // Carni
-  { id: "i1", nome: "Petto di pollo", prot: 31, per100: true, categoria: "carne", colore: "#e8a23a", emoji: "🍗" },
-  { id: "i2", nome: "Petto di tacchino", prot: 29, per100: true, categoria: "carne", colore: "#e8a23a", emoji: "🦃" },
-  { id: "i3", nome: "Bresaola", prot: 33, per100: true, categoria: "carne", colore: "#e8a23a", emoji: "🥩" },
-  { id: "i4", nome: "Prosciutto cotto", prot: 19, per100: true, categoria: "carne", colore: "#e8a23a", emoji: "🥩" },
-  { id: "i5", nome: "Manzo magro", prot: 26, per100: true, categoria: "carne", colore: "#e8a23a", emoji: "🥩" },
-  { id: "i6", nome: "Lonza di maiale", prot: 22, per100: true, categoria: "carne", colore: "#e8a23a", emoji: "🥩" },
+  { id: "i1",  nome: "Petto di pollo",         prot: 31,  per100: true,  categoria: "carne",       colore: "#e8a23a", emoji: "🍗" },
+  { id: "i2",  nome: "Petto di tacchino",       prot: 29,  per100: true,  categoria: "carne",       colore: "#e8a23a", emoji: "🦃" },
+  { id: "i3",  nome: "Bresaola",                prot: 33,  per100: true,  categoria: "carne",       colore: "#e8a23a", emoji: "🥩" },
+  { id: "i4",  nome: "Prosciutto cotto",        prot: 19,  per100: true,  categoria: "carne",       colore: "#e8a23a", emoji: "🥩" },
+  { id: "i5",  nome: "Manzo magro",             prot: 26,  per100: true,  categoria: "carne",       colore: "#e8a23a", emoji: "🥩" },
+  { id: "i6",  nome: "Lonza di maiale",         prot: 22,  per100: true,  categoria: "carne",       colore: "#e8a23a", emoji: "🥩" },
   // Pesce
-  { id: "i7", nome: "Tonno al naturale", prot: 25, per100: true, categoria: "pesce", colore: "#5b9bd4", emoji: "🐟" },
-  { id: "i8", nome: "Salmone", prot: 20, per100: true, categoria: "pesce", colore: "#5b9bd4", emoji: "🐟" },
-  { id: "i9", nome: "Merluzzo", prot: 20, per100: true, categoria: "pesce", colore: "#5b9bd4", emoji: "🐟" },
-  { id: "i10", nome: "Sogliola / Platessa", prot: 17, per100: true, categoria: "pesce", colore: "#5b9bd4", emoji: "🐟" },
-  { id: "i11", nome: "Sgombro", prot: 19, per100: true, categoria: "pesce", colore: "#5b9bd4", emoji: "🐟" },
-  { id: "i12", nome: "Gamberi", prot: 18, per100: true, categoria: "pesce", colore: "#5b9bd4", emoji: "🦐" },
-  { id: "i13", nome: "Polpo (cotto)", prot: 15, per100: true, categoria: "pesce", colore: "#5b9bd4", emoji: "🐙" },
-  { id: "i14", nome: "Tonno sott'olio (sgoc.)", prot: 26, per100: true, categoria: "pesce", colore: "#5b9bd4", emoji: "🐟" },
+  { id: "i7",  nome: "Tonno al naturale",       prot: 25,  per100: true,  categoria: "pesce",       colore: "#5b9bd4", emoji: "🐟" },
+  { id: "i8",  nome: "Salmone",                 prot: 20,  per100: true,  categoria: "pesce",       colore: "#5b9bd4", emoji: "🐟" },
+  { id: "i9",  nome: "Merluzzo",                prot: 20,  per100: true,  categoria: "pesce",       colore: "#5b9bd4", emoji: "🐟" },
+  { id: "i10", nome: "Sogliola / Platessa",     prot: 17,  per100: true,  categoria: "pesce",       colore: "#5b9bd4", emoji: "🐟" },
+  { id: "i11", nome: "Sgombro",                 prot: 19,  per100: true,  categoria: "pesce",       colore: "#5b9bd4", emoji: "🐟" },
+  { id: "i12", nome: "Gamberi",                 prot: 18,  per100: true,  categoria: "pesce",       colore: "#5b9bd4", emoji: "🦐" },
+  { id: "i13", nome: "Polpo (cotto)",           prot: 15,  per100: true,  categoria: "pesce",       colore: "#5b9bd4", emoji: "🐙" },
+  { id: "i14", nome: "Tonno sott'olio (sgoc.)", prot: 26,  per100: true,  categoria: "pesce",       colore: "#5b9bd4", emoji: "🐟" },
   // Uova
-  { id: "i15", nome: "Uovo intero", prot: 6, per100: false, unitLabel: "uovo", categoria: "uova", colore: "#d4a843", emoji: "🥚" },
-  { id: "i16", nome: "Albume", prot: 11, per100: true, categoria: "uova", colore: "#d4a843", emoji: "🥚" },
+  { id: "i15", nome: "Uovo intero",             prot: 6,   per100: false, unitLabel: "uovo", categoria: "uova", colore: "#d4a843", emoji: "🥚" },
+  { id: "i16", nome: "Albume",                  prot: 11,  per100: true,  categoria: "uova",        colore: "#d4a843", emoji: "🥚" },
   // Latticini
-  { id: "i17", nome: "Yogurt greco", prot: 10, per100: true, categoria: "latticini", colore: "#a87fd4", emoji: "🥛" },
-  { id: "i18", nome: "Ricotta", prot: 11, per100: true, categoria: "latticini", colore: "#a87fd4", emoji: "🧀" },
-  { id: "i19", nome: "Latte intero", prot: 3.4, per100: true, categoria: "latticini", colore: "#a87fd4", emoji: "🥛" },
-  { id: "i20", nome: "Fiocchi di latte", prot: 11, per100: true, categoria: "latticini", colore: "#a87fd4", emoji: "🧀" },
-  { id: "i21", nome: "Mozzarella", prot: 18, per100: true, categoria: "latticini", colore: "#a87fd4", emoji: "🧀" },
-  { id: "i22", nome: "Parmigiano", prot: 36, per100: true, categoria: "latticini", colore: "#a87fd4", emoji: "🧀" },
-  { id: "i23", nome: "Skyr", prot: 11, per100: true, categoria: "latticini", colore: "#a87fd4", emoji: "🥛" },
+  { id: "i17", nome: "Yogurt greco",            prot: 10,  per100: true,  categoria: "latticini",   colore: "#a87fd4", emoji: "🥛" },
+  { id: "i18", nome: "Ricotta",                 prot: 11,  per100: true,  categoria: "latticini",   colore: "#a87fd4", emoji: "🧀" },
+  { id: "i19", nome: "Latte intero",            prot: 3.4, per100: true,  categoria: "latticini",   colore: "#a87fd4", emoji: "🥛" },
+  { id: "i20", nome: "Fiocchi di latte",        prot: 11,  per100: true,  categoria: "latticini",   colore: "#a87fd4", emoji: "🧀" },
+  { id: "i21", nome: "Mozzarella",              prot: 18,  per100: true,  categoria: "latticini",   colore: "#a87fd4", emoji: "🧀" },
+  { id: "i22", nome: "Parmigiano",              prot: 36,  per100: true,  categoria: "latticini",   colore: "#a87fd4", emoji: "🧀" },
+  { id: "i23", nome: "Skyr",                    prot: 11,  per100: true,  categoria: "latticini",   colore: "#a87fd4", emoji: "🥛" },
   // Legumi
-  { id: "i24", nome: "Ceci (cotti)", prot: 9, per100: true, categoria: "legumi", colore: "#5eb885", emoji: "🫘" },
-  { id: "i25", nome: "Fagioli cannellini", prot: 8, per100: true, categoria: "legumi", colore: "#5eb885", emoji: "🫘" },
-  { id: "i26", nome: "Lenticchie rosse", prot: 9, per100: true, categoria: "legumi", colore: "#5eb885", emoji: "🫘" },
-  { id: "i27", nome: "Fagioli borlotti", prot: 7, per100: true, categoria: "legumi", colore: "#5eb885", emoji: "🫘" },
-  { id: "i28", nome: "Edamame", prot: 11, per100: true, categoria: "legumi", colore: "#5eb885", emoji: "🫘" },
-  { id: "i29", nome: "Tofu", prot: 8, per100: true, categoria: "legumi", colore: "#5eb885", emoji: "🫘" },
+  { id: "i24", nome: "Ceci (cotti)",            prot: 9,   per100: true,  categoria: "legumi",      colore: "#5eb885", emoji: "🫘" },
+  { id: "i25", nome: "Fagioli cannellini",      prot: 8,   per100: true,  categoria: "legumi",      colore: "#5eb885", emoji: "🫘" },
+  { id: "i26", nome: "Lenticchie rosse",        prot: 9,   per100: true,  categoria: "legumi",      colore: "#5eb885", emoji: "🫘" },
+  { id: "i27", nome: "Fagioli borlotti",        prot: 7,   per100: true,  categoria: "legumi",      colore: "#5eb885", emoji: "🫘" },
+  { id: "i28", nome: "Edamame",                 prot: 11,  per100: true,  categoria: "legumi",      colore: "#5eb885", emoji: "🫘" },
+  { id: "i29", nome: "Tofu",                    prot: 8,   per100: true,  categoria: "legumi",      colore: "#5eb885", emoji: "🫘" },
   // Carboidrati
-  { id: "i30", nome: "Riso (cotto)", prot: 2.7, per100: true, categoria: "carboidrati", colore: "#cc8844", emoji: "🍚" },
-  { id: "i31", nome: "Pasta integrale (cotta)", prot: 5, per100: true, categoria: "carboidrati", colore: "#cc8844", emoji: "🍝" },
-  { id: "i32", nome: "Pane integrale", prot: 9, per100: true, categoria: "carboidrati", colore: "#cc8844", emoji: "🍞" },
-  { id: "i33", nome: "Fiocchi d'avena", prot: 13, per100: true, categoria: "carboidrati", colore: "#cc8844", emoji: "🌾" },
-  { id: "i34", nome: "Piadina integrale", prot: 9, per100: true, categoria: "carboidrati", colore: "#cc8844", emoji: "🫓" },
-  { id: "i35", nome: "Quinoa (cotta)", prot: 4, per100: true, categoria: "carboidrati", colore: "#cc8844", emoji: "🌾" },
-  { id: "i36", nome: "Patata dolce", prot: 1.6, per100: true, categoria: "carboidrati", colore: "#cc8844", emoji: "🍠" },
+  { id: "i30", nome: "Riso (cotto)",            prot: 2.7, per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🍚" },
+  { id: "i31", nome: "Pasta integrale (cotta)", prot: 5,   per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🍝" },
+  { id: "i32", nome: "Pane integrale",          prot: 9,   per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🍞" },
+  { id: "i33", nome: "Fiocchi d'avena",         prot: 13,  per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🌾" },
+  { id: "i34", nome: "Piadina integrale",       prot: 9,   per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🫓" },
+  { id: "i35", nome: "Quinoa (cotta)",          prot: 4,   per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🌾" },
+  { id: "i36", nome: "Patata dolce",            prot: 1.6, per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🍠" },
+  { id: "i47", nome: "Farro (cotto)",           prot: 7,   per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🌾" },
+  { id: "i48", nome: "Orzo (cotto)",            prot: 4,   per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🌾" },
+  { id: "i49", nome: "Patate (cotte)",          prot: 2,   per100: true,  categoria: "carboidrati", colore: "#cc8844", emoji: "🥔" },
   // Frutta secca
-  { id: "i37", nome: "Burro di arachidi", prot: 25, per100: true, categoria: "frutta secca", colore: "#c4a244", emoji: "🥜" },
-  { id: "i38", nome: "Mandorle", prot: 21, per100: true, categoria: "frutta secca", colore: "#c4a244", emoji: "🌰" },
-  { id: "i39", nome: "Noci", prot: 15, per100: true, categoria: "frutta secca", colore: "#c4a244", emoji: "🌰" },
-  { id: "i40", nome: "Arachidi", prot: 26, per100: true, categoria: "frutta secca", colore: "#c4a244", emoji: "🥜" },
+  { id: "i37", nome: "Burro di arachidi",       prot: 25,  per100: true,  categoria: "frutta secca",colore: "#c4a244", emoji: "🥜" },
+  { id: "i38", nome: "Mandorle",                prot: 21,  per100: true,  categoria: "frutta secca",colore: "#c4a244", emoji: "🌰" },
+  { id: "i39", nome: "Noci",                    prot: 15,  per100: true,  categoria: "frutta secca",colore: "#c4a244", emoji: "🌰" },
+  { id: "i40", nome: "Arachidi",                prot: 26,  per100: true,  categoria: "frutta secca",colore: "#c4a244", emoji: "🥜" },
   // Verdure
-  { id: "i41", nome: "Spinaci freschi", prot: 2.9, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🥬" },
-  { id: "i42", nome: "Broccoli (cotti)", prot: 3, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🥦" },
-  { id: "i43", nome: "Zucchine", prot: 1.8, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🥒" },
-  { id: "i44", nome: "Funghi champignon", prot: 3.1, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🍄" },
-  { id: "i45", nome: "Piselli (cotti)", prot: 5, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🫛" },
-  { id: "i46", nome: "Cavolo riccio (kale)", prot: 4.3, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🥬" },
+  { id: "i41", nome: "Spinaci freschi",         prot: 2.9, per100: true,  categoria: "verdure",     colore: "#4a9e6a", emoji: "🥬" },
+  { id: "i42", nome: "Broccoli (cotti)",        prot: 3,   per100: true,  categoria: "verdure",     colore: "#4a9e6a", emoji: "🥦" },
+  { id: "i43", nome: "Zucchine",                prot: 1.8, per100: true,  categoria: "verdure",     colore: "#4a9e6a", emoji: "🥒" },
+  { id: "i44", nome: "Funghi champignon",       prot: 3.1, per100: true,  categoria: "verdure",     colore: "#4a9e6a", emoji: "🍄" },
+  { id: "i45", nome: "Piselli (cotti)",         prot: 5,   per100: true,  categoria: "verdure",     colore: "#4a9e6a", emoji: "🫛" },
+  { id: "i46", nome: "Cavolo riccio (kale)",    prot: 4.3, per100: true,  categoria: "verdure",     colore: "#4a9e6a", emoji: "🥬" },
 ];
 
 const RICETTE_DB = [
-  { id: "r1", nome: "Pollo e riso alla piastra", prot: 55, tempo: 15, pasto: "pranzo", ingredienti: ["200g petto pollo", "80g riso", "verdure grigliate", "olio EVO"] },
-  { id: "r2", nome: "Pasta al tonno veloce", prot: 50, tempo: 10, pasto: "pranzo", ingredienti: ["80g pasta integrale", "2 scatolette tonno", "pomodorini", "olio EVO"] },
-  { id: "r3", nome: "Frittata al tonno", prot: 55, tempo: 8, pasto: "pranzo", ingredienti: ["4 uova", "1 scatoletta tonno", "olio", "erba cipollina"] },
-  { id: "r4", nome: "Insalata tonno e uova sode", prot: 52, tempo: 5, pasto: "pranzo", ingredienti: ["2 uova", "1 scatoletta tonno", "pomodori", "mais", "limone"] },
-  { id: "r5", nome: "Salmone al forno con patate dolci", prot: 48, tempo: 25, pasto: "pranzo", ingredienti: ["150g salmone", "200g patate dolci", "limone", "timo"] },
-  { id: "r6", nome: "Insalata di tacchino e fagioli", prot: 50, tempo: 5, pasto: "pranzo", ingredienti: ["200g tacchino", "fagioli cannellini", "pomodori", "mais"] },
-  { id: "r7", nome: "Merluzzo con zucchine e riso", prot: 50, tempo: 20, pasto: "pranzo", ingredienti: ["200g merluzzo", "80g riso integrale", "2 zucchine", "aglio"] },
-  { id: "r8", nome: "Bowl yogurt greco e pollo", prot: 55, tempo: 10, pasto: "pranzo", ingredienti: ["150g pollo", "150g yogurt greco", "cetrioli", "pomodorini"] },
-  { id: "r9", nome: "Wrap tacchino e ricotta", prot: 45, tempo: 5, pasto: "pranzo", ingredienti: ["2 piadine integrali", "150g tacchino", "100g ricotta", "insalata"] },
-  { id: "r10", nome: "Latte + uova strapazzate", prot: 22, tempo: 8, pasto: "colazione", ingredienti: ["250ml latte", "2 uova", "2 fette biscottate integrali"] },
-  { id: "r11", nome: "Yogurt greco + frutta + noci", prot: 20, tempo: 5, pasto: "colazione", ingredienti: ["150g yogurt greco", "1 banana", "20g noci"] },
-  { id: "r12", nome: "Pane integrale + uova sode + bresaola", prot: 28, tempo: 10, pasto: "colazione", ingredienti: ["2 fette pane integrale", "2 uova", "60g bresaola"] },
-  { id: "r13", nome: "Avena con latte e frutta secca", prot: 18, tempo: 5, pasto: "colazione", ingredienti: ["60g fiocchi avena", "250ml latte", "20g frutta secca", "1 banana"] },
-  { id: "r14", nome: "Pancakes proteici", prot: 30, tempo: 10, pasto: "colazione", ingredienti: ["2 uova", "1 banana matura", "30g fiocchi avena"] },
-  { id: "r15", nome: "Frullato latte e burro arachidi", prot: 25, tempo: 5, pasto: "colazione", ingredienti: ["250ml latte", "1 banana", "2 cucchiai burro arachidi", "cacao"] },
-  { id: "r16", nome: "Pollo alla piastra con verdure", prot: 50, tempo: 20, pasto: "cena", ingredienti: ["200g petto pollo", "zucchine", "peperoni", "carote", "rosmarino"] },
-  { id: "r17", nome: "Salmone al vapore con broccoli", prot: 45, tempo: 20, pasto: "cena", ingredienti: ["180g salmone", "300g broccoli", "limone", "olio EVO"] },
-  { id: "r18", nome: "Zuppa di legumi e tacchino", prot: 45, tempo: 25, pasto: "cena", ingredienti: ["150g tacchino", "fagioli borlotti", "ceci", "carota", "brodo"] },
-  { id: "r19", nome: "Merluzzo al forno con patate", prot: 48, tempo: 25, pasto: "cena", ingredienti: ["200g merluzzo", "250g patate", "pomodorini", "olive", "capperi"] },
-  { id: "r20", nome: "Tacchino in padella con funghi", prot: 48, tempo: 15, pasto: "cena", ingredienti: ["200g tacchino", "200g funghi", "aglio", "prezzemolo", "vino bianco"] },
-  { id: "r21", nome: "Minestra lenticchie con uovo", prot: 32, tempo: 20, pasto: "cena", ingredienti: ["150g lenticchie rosse", "brodo vegetale", "carota", "2 uova"] },
-  { id: "r22", nome: "Pollo in crosta di erbe con riso", prot: 55, tempo: 20, pasto: "cena", ingredienti: ["200g petto pollo", "80g riso", "pangrattato", "erbe aromatiche"] },
-  { id: "r23", nome: "Sogliola con spinaci saltati", prot: 42, tempo: 15, pasto: "cena", ingredienti: ["250g sogliola", "300g spinaci freschi", "aglio", "limone"] },
-  { id: "r24", nome: "Insalata di ceci e tonno", prot: 48, tempo: 5, pasto: "cena", ingredienti: ["1 scatoletta tonno", "200g ceci", "pomodori", "cetriolo", "limone"] },
+  { id: "r1",  nome: "Pollo e riso alla piastra",              prot: 55, tempo: 15, pasto: "pranzo",   ingredienti: ["200g petto pollo", "80g riso", "verdure grigliate", "olio EVO"] },
+  { id: "r2",  nome: "Pasta al tonno veloce",                  prot: 50, tempo: 10, pasto: "pranzo",   ingredienti: ["80g pasta integrale", "2 scatolette tonno", "pomodorini", "olio EVO"] },
+  { id: "r3",  nome: "Frittata al tonno",                      prot: 55, tempo: 8,  pasto: "pranzo",   ingredienti: ["4 uova", "1 scatoletta tonno", "olio", "erba cipollina"] },
+  { id: "r4",  nome: "Insalata tonno e uova sode",             prot: 52, tempo: 5,  pasto: "pranzo",   ingredienti: ["2 uova", "1 scatoletta tonno", "pomodori", "mais", "limone"] },
+  { id: "r5",  nome: "Salmone al forno con patate dolci",      prot: 48, tempo: 25, pasto: "pranzo",   ingredienti: ["150g salmone", "200g patate dolci", "limone", "timo"] },
+  { id: "r6",  nome: "Insalata di tacchino e fagioli",         prot: 50, tempo: 5,  pasto: "pranzo",   ingredienti: ["200g tacchino", "fagioli cannellini", "pomodori", "mais"] },
+  { id: "r7",  nome: "Merluzzo con zucchine e riso",           prot: 50, tempo: 20, pasto: "pranzo",   ingredienti: ["200g merluzzo", "80g riso integrale", "2 zucchine", "aglio"] },
+  { id: "r8",  nome: "Bowl yogurt greco e pollo",              prot: 55, tempo: 10, pasto: "pranzo",   ingredienti: ["150g pollo", "150g yogurt greco", "cetrioli", "pomodorini"] },
+  { id: "r9",  nome: "Wrap tacchino e ricotta",                prot: 45, tempo: 5,  pasto: "pranzo",   ingredienti: ["2 piadine integrali", "150g tacchino", "100g ricotta", "insalata"] },
+  { id: "r10", nome: "Latte + uova strapazzate",               prot: 22, tempo: 8,  pasto: "colazione",ingredienti: ["250ml latte", "2 uova", "2 fette biscottate integrali"] },
+  { id: "r11", nome: "Yogurt greco + frutta + noci",           prot: 20, tempo: 5,  pasto: "colazione",ingredienti: ["150g yogurt greco", "1 banana", "20g noci"] },
+  { id: "r12", nome: "Pane integrale + uova sode + bresaola",  prot: 28, tempo: 10, pasto: "colazione",ingredienti: ["2 fette pane integrale", "2 uova", "60g bresaola"] },
+  { id: "r13", nome: "Avena con latte e frutta secca",         prot: 18, tempo: 5,  pasto: "colazione",ingredienti: ["60g fiocchi avena", "250ml latte", "20g frutta secca", "1 banana"] },
+  { id: "r14", nome: "Pancakes proteici",                      prot: 30, tempo: 10, pasto: "colazione",ingredienti: ["2 uova", "1 banana matura", "30g fiocchi avena"] },
+  { id: "r15", nome: "Frullato latte e burro arachidi",        prot: 25, tempo: 5,  pasto: "colazione",ingredienti: ["250ml latte", "1 banana", "2 cucchiai burro arachidi", "cacao"] },
+  { id: "r16", nome: "Pollo alla piastra con verdure",         prot: 50, tempo: 20, pasto: "cena",     ingredienti: ["200g petto pollo", "zucchine", "peperoni", "carote", "rosmarino"] },
+  { id: "r17", nome: "Salmone al vapore con broccoli",         prot: 45, tempo: 20, pasto: "cena",     ingredienti: ["180g salmone", "300g broccoli", "limone", "olio EVO"] },
+  { id: "r18", nome: "Zuppa di legumi e tacchino",             prot: 45, tempo: 25, pasto: "cena",     ingredienti: ["150g tacchino", "fagioli borlotti", "ceci", "carota", "brodo"] },
+  { id: "r19", nome: "Merluzzo al forno con patate",           prot: 48, tempo: 25, pasto: "cena",     ingredienti: ["200g merluzzo", "250g patate", "pomodorini", "olive", "capperi"] },
+  { id: "r20", nome: "Tacchino in padella con funghi",         prot: 48, tempo: 15, pasto: "cena",     ingredienti: ["200g tacchino", "200g funghi", "aglio", "prezzemolo", "vino bianco"] },
+  { id: "r21", nome: "Minestra lenticchie con uovo",           prot: 32, tempo: 20, pasto: "cena",     ingredienti: ["150g lenticchie rosse", "brodo vegetale", "carota", "2 uova"] },
+  { id: "r22", nome: "Pollo in crosta di erbe con riso",       prot: 55, tempo: 20, pasto: "cena",     ingredienti: ["200g petto pollo", "80g riso", "pangrattato", "erbe aromatiche"] },
+  { id: "r23", nome: "Sogliola con spinaci saltati",           prot: 42, tempo: 15, pasto: "cena",     ingredienti: ["250g sogliola", "300g spinaci freschi", "aglio", "limone"] },
+  { id: "r24", nome: "Insalata di ceci e tonno",               prot: 48, tempo: 5,  pasto: "cena",     ingredienti: ["1 scatoletta tonno", "200g ceci", "pomodori", "cetriolo", "limone"] },
 ];
 
 const CATEGORIE = ["tutti", "carne", "pesce", "uova", "latticini", "legumi", "carboidrati", "frutta secca", "verdure"];
@@ -90,7 +93,7 @@ const PASTO_META = { colazione: { emoji: "☀️", target: [20, 25] }, pranzo: {
 const TARGET_GIORNO = 143;
 
 export default function App() {
-  const [tab, setTab] = useState("valori");
+  const [tab, setTab] = useState("tracker");
   const [log, setLog] = useState({ colazione: [], pranzo: [], cena: [] });
   const [spesa, setSpesa] = useState([]);
   const [categoriaFiltro, setCategoriaFiltro] = useState("tutti");
@@ -192,7 +195,7 @@ export default function App() {
       `}</style>
 
       {/* Header */}
-      <div style={{ padding: "56px 16px 0", maxWidth: 640, margin: "0 auto" }}>
+      <div style={{ padding: "20px 16px 0", maxWidth: 640, margin: "0 auto" }}>
         <span style={{ fontFamily: "'SF Mono', 'Courier New', monospace", fontSize: 10, letterSpacing: 3, color: "#d4a843", textTransform: "uppercase" }}>Piano Alimentare · 95kg</span>
         <h1 style={{ fontFamily: "-apple-system, 'SF Pro Display', Georgia, serif", fontSize: 24, fontWeight: 900, lineHeight: 1.1, marginBottom: 16, marginTop: 2 }}>
           {tab === "tracker" && <>Tracker <span style={{ color: "#d4a843" }}>proteine</span></>}
@@ -270,13 +273,25 @@ export default function App() {
                 </div>
               );
             })}
+            {/* Suggerimento allenamento/riposo */}
+            <div style={{ display: "flex", gap: 8, marginTop: 8, marginBottom: 8 }}>
+              <div style={{ flex: 1, background: "#1f3320", border: "1px solid #3a6b3e", borderRadius: 10, padding: "12px 14px" }}>
+                <p style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 12, fontWeight: 700, color: "#5eb885", marginBottom: 6 }}>⚡ Giorno allenamento</p>
+                <p style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 12, color: "#aaa", lineHeight: 1.5 }}>Pranzo ricco di carboidrati (riso, pasta, farro, patate) entro 1 ora dalla fine. Ricarica il glicogeno e aiuta le proteine ad entrare nel muscolo.</p>
+              </div>
+              <div style={{ flex: 1, background: "#1a1f2e", border: "1px solid #2a3a5e", borderRadius: 10, padding: "12px 14px" }}>
+                <p style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 12, fontWeight: 700, color: "#7a9ccc", marginBottom: 6 }}>😴 Giorno riposo</p>
+                <p style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 12, color: "#aaa", lineHeight: 1.5 }}>Riduci i carboidrati del pranzo. Proteine uguali, porzioni di riso e pasta dimezzate o eliminate. Punta su pesce, uova e verdure.</p>
+              </div>
+            </div>
+
             {/* Consigli */}
-            <div style={{ marginTop: 8 }}>
+            <div style={{ marginTop: 4 }}>
               {[
                 { emoji: "⏱", testo: "Mangia entro 1 ora dopo l'allenamento per massimizzare il recupero muscolare." },
+                { emoji: "🌾", testo: "Farro e quinoa sono alternative al riso più ricche di proteine e fibre." },
                 { emoji: "🥚", testo: "Le uova sono la fonte proteica più versatile a colazione: veloci e complete." },
                 { emoji: "🐟", testo: "Limita il tonno a 3-4 volte a settimana per via del mercurio. Alterna con merluzzo e salmone." },
-                { emoji: "😴", testo: "Nei giorni di riposo riduci i carboidrati del pranzo ma mantieni le proteine uguali." },
                 { emoji: "🧀", testo: "Lo yogurt greco ha il doppio delle proteine rispetto allo yogurt normale." },
                 { emoji: "🫘", testo: "I legumi la sera sono ottimi: fibre lente che nutrono i muscoli durante la notte." },
               ].map((c, i) => (
@@ -417,7 +432,7 @@ export default function App() {
 
       {/* Tab bar bottom */}
       <div className="tab-bottom">
-        {[["valori", "💪", "Valori"], ["tracker", "🥩", "Tracker"], ["spesa", "🛒", "Spesa"], ["ricette", "🍽", "Ricette"]].map(([id, emoji, label]) => (
+        {[["valori","💪","Valori"],["tracker","🥩","Tracker"],["spesa","🛒","Spesa"],["ricette","🍽","Ricette"]].map(([id, emoji, label]) => (
           <button key={id} className="tab-btn-b" onClick={() => setTab(id)} style={{ position: "relative" }}>
             <span style={{ fontSize: 22 }}>{emoji}</span>
             <span style={{ fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif", fontSize: 10, color: tab === id ? "#d4a843" : "#555", fontWeight: tab === id ? 700 : 400 }}>{label}</span>
@@ -476,3 +491,4 @@ export default function App() {
     </div>
   );
 }
+
