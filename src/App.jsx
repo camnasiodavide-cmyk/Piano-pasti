@@ -94,7 +94,8 @@ const TARGET_GIORNO = 143;
 
 export default function App() {
   const [tab, setTab] = useState("valori");
-  const [spesa, setSpconst today = new Date().toISOString().split("T")[0];
+  const [spesa, setSpesa] = useState([])
+  const today = new Date().toISOString().split("T")[0];
 
   const [log, setLog] = useState(() => {
     try {
