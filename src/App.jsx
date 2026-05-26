@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const INGREDIENTI_DB = [
   // Carni
@@ -94,8 +94,16 @@ const TARGET_GIORNO = 143;
 
 export default function App() {
   const [tab, setTab] = useState("valori");
-  const [log, setLog] = useState({ colazione: [], pranzo: [], cena: [] });
-  const [spesa, setSpesa] = useState([]);
+  const [spesa, setSpconst today = new Date().toISOString().split("T")[0];
+
+  const [log, setLog] = useState(() => {
+    try {
+      const saved = localStorage.getItem("log");
+      const savedDate = localStorage.getItem("logDate");
+      if (saved && savedDate === today) return JSON.parse(saved);
+    } catch { }
+    return { colazione: [], pranzo: [], cena: [] };
+  });esa] = useState([]);
   const [categoriaFiltro, setCategoriaFiltro] = useState("tutti");
   const [ricerca, setRicerca] = useState("");
   const [ricercaRicette, setRicercaRicette] = useState("");
@@ -138,8 +146,10 @@ export default function App() {
     setSpesa(prev => [...prev, { ...ing, spuntato: false }]);
   };
 
-  const rimuoviLog = (pasto, uid) => setLog(prev => ({ ...prev, [pasto]: prev[pasto].filter(i => i.uid !== uid) }));
-  const toggleSpesa = (id) => setSpesa(prev => prev.map(s => s.id === id ? { ...s, spuntato: !s.spuntato } : s));
+  const toggleSpuseEffect(() => {
+    localStorage.setItem("log", JSON.stringify(log));
+    localStorage.setItem("logDate", today);
+  }, [log]); esa = (id) => setSpesa(prev => prev.map(s => s.id === id ? { ...s, spuntato: !s.spuntato } : s));
   const rimuoviSpesa = (id) => setSpesa(prev => prev.filter(s => s.id !== id));
 
   const statoColore = (att, min, max) => {
