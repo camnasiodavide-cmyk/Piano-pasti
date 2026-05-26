@@ -94,7 +94,7 @@ const TARGET_GIORNO = 143;
 
 export default function App() {
   const [tab, setTab] = useState("valori");
-  const [spesa, setSpesa] = useState([])
+
   const today = new Date().toISOString().split("T")[0];
 
   const [log, setLog] = useState(() => {
@@ -104,7 +104,8 @@ export default function App() {
       if (saved && savedDate === today) return JSON.parse(saved);
     } catch { }
     return { colazione: [], pranzo: [], cena: [] };
-  });esa] = useState([]);
+  });
+  const [spesa, setSpesa] = useState([]);
   const [categoriaFiltro, setCategoriaFiltro] = useState("tutti");
   const [ricerca, setRicerca] = useState("");
   const [ricercaRicette, setRicercaRicette] = useState("");
@@ -147,10 +148,12 @@ export default function App() {
     setSpesa(prev => [...prev, { ...ing, spuntato: false }]);
   };
 
-  const toggleSpuseEffect(() => {
+  const toggleSpesa = (id) => setSpesa(prev => prev.map(s => s.id === id ? { ...s, spuntato: !s.spuntato } : s));
+
+  useEffect(() => {
     localStorage.setItem("log", JSON.stringify(log));
     localStorage.setItem("logDate", today);
-  }, [log]); esa = (id) => setSpesa(prev => prev.map(s => s.id === id ? { ...s, spuntato: !s.spuntato } : s));
+  }, [log]);
   const rimuoviSpesa = (id) => setSpesa(prev => prev.filter(s => s.id !== id));
 
   const statoColore = (att, min, max) => {
