@@ -58,6 +58,7 @@ const INGREDIENTI_DB = [
   { id: "i44", nome: "Funghi champignon", prot: 3.1, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🍄" },
   { id: "i45", nome: "Piselli (cotti)", prot: 5, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🫛" },
   { id: "i46", nome: "Cavolo riccio (kale)", prot: 4.3, per100: true, categoria: "verdure", colore: "#4a9e6a", emoji: "🥬" },
+  { id: "i50", nome: "Biscotti integrali", prot: 1.2, per100: false, unitLabel: "biscotto (15g)", categoria: "carboidrati", colore: "#cc8844", emoji: "🍪" },
 ];
 
 const RICETTE_DB = [
